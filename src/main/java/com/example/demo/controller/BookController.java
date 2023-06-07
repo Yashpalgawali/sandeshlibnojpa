@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.models.AssignedBooks;
 import com.example.demo.models.Books;
+import com.example.demo.service.AssignBookService;
 import com.example.demo.service.BookService;
 
 @Controller
@@ -50,5 +52,26 @@ public class BookController {
 		return blist;
 	}
 	
+	@Autowired
+	AssignBookService assignbookserv;
 	
-}
+	@PostMapping("/issuebook")
+	@ResponseBody
+	public String issueBook(@RequestBody AssignedBooks books)
+	{
+		int res = assignbookserv.assignBook(books);
+		if(res>0)
+			{return "SUCCESS";}
+		else
+		{
+			return "FAILED";
+		}
+	}
+	@GetMapping("/getbooks")
+	@ResponseBody
+	public List<AssignedBooks> getAll()
+	{
+		return assignbookserv.getAllAssignedBooks();
+	}
+	
+}	
