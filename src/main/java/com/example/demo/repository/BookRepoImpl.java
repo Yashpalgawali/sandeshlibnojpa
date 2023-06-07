@@ -22,6 +22,7 @@ public class BookRepoImpl implements BookRepository {
 	@Override
 	public int saveBook(Books book) {
 		// TODO Auto-generated method stub
+		
 		return temp.update("INSERT INTO tbl_books values('0',?,?,?,?,?,?,?)", new PreparedStatementSetter() {
 			
 			@Override
