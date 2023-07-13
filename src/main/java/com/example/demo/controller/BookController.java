@@ -67,9 +67,9 @@ public class BookController {
 			return "FAILED";
 		}
 	}
-	@GetMapping("/getbooks")
+	@GetMapping("/getassignedbooks")
 	@ResponseBody
-	public List<AssignedBooks> getAll()
+	public List<AssignedBooks> getAllAssignedBooks()
 	{
 		return assignbookserv.getAllAssignedBooks();
 	}
