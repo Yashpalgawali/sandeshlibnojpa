@@ -27,9 +27,20 @@ public class BookservImpl implements BookService {
 	}
 
 	@Override
-	public Books getBookByBookId(Long id) {
+	public List<Books> getBookByBookId(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			return bookrepo.getBookByBookId(id);
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public int updateBook(Books book) {
+		// TODO Auto-generated method stub
+		return bookrepo.updateBook(book);
 	}
 
 }

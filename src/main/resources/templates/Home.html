@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+	.carticon{
+		animation:blinkingtext 0.9s infinite
+	}
+@keyframes blinkingtext
+{ 0% { color : red}
+	20% { color : green}
+    60% { color : black}
+	100% { color : #ffee99}
+}
+
+</style>
 </head>
 <body>
-
+<div >
+	<ul>
+		<li href="">Add</li>
+		<li href="">Add</li>
+		<li href="" class="carticon">Add</li>
+	</ul>
+</div>
 </body>
 </html>

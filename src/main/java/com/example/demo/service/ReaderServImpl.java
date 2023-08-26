@@ -26,9 +26,16 @@ public class ReaderServImpl implements ReaderService {
 	}
 
 	@Override
-	public Readers getReaderById(Long id) {
+	public List<Readers> getReaderById(Long id) {
 		// TODO Auto-generated method stub
-		return readerrepo.getReaderById(id);
+		try {
+			return readerrepo.getReaderById(id);
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+		
 	}
 
 	@Override

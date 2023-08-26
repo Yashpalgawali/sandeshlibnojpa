@@ -24,4 +24,6 @@ public class Readers {
 	private Long book_id; 
 	
 	private List<Books> books;
+	
+	private Books book;
 }

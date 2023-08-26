@@ -38,13 +38,14 @@ public class ReaderController {
 		return readerserv.getAllReaders();
 	}
 	
-	@GetMapping("getreaderbyid/{id}")
+	@GetMapping("getreaderbyid/{id}")@ResponseBody
 	public String getReaderById(@PathVariable("id")Long id)
 	{
-		Readers reader = readerserv.getReaderById(id);
+		List<Readers> reader = readerserv.getReaderById(id);
 		if(reader!=null)
 		{
-			return "EditReader";
+			return reader.toString();
+			//return "EditReader";
 		}
 		else
 		{

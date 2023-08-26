@@ -10,6 +10,7 @@ public interface BookService {
 	
 	public List<Books> getAllBooks();
 	
-	public Books getBookByBookId(Long id);
+	public List<Books> getBookByBookId(Long id);
 	
+	public int updateBook(Books book);
 }

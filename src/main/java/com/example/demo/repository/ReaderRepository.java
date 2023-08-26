@@ -10,7 +10,7 @@ public interface ReaderRepository {
 	
 	public List<Readers> getAllReaders();
 	
-	public Readers getReaderById(Long id);
+	public List<Readers> getReaderById(Long id);
 	
 	public int updateReader(Readers reader);
 }

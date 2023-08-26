@@ -64,9 +64,47 @@ public class BookRepoImpl implements BookRepository {
 	}
 
 	@Override
-	public Books getBookByBookId(Long id) {
+	public List<Books> getBookByBookId(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return temp.query("select * from tbl_books WHERE book_id="+id, new RowMapper<Books>() {
+
+			@Override
+			public Books mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				Books book = new Books();
+				
+				book.setBook_id(rs.getLong(1));
+				book.setBook_name(rs.getString(2));
+				book.setBook_author(rs.getString(3));
+				book.setDescription(rs.getString(4));
+				book.setPrice(rs.getFloat(5));
+				book.setPublisher(rs.getString(6));
+				book.setPublished_date(rs.getString(7));
+				book.setQty(rs.getInt(8));
+
+				return book;
+			}
+		});
+	}
+
+	@Override
+	public int updateBook(Books book) {
+		// TODO Auto-generated method stub
+		return temp.update("update tbl_books set book_name=?,book_author=?,description=?,price=?,publisher=?,published_date=?,qty=? WHERE book_id=?", new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				// TODO Auto-generated method stub
+				ps.setString(1, book.getBook_name());
+				ps.setString(2, book.getBook_author());
+				ps.setString(3, book.getDescription());
+				ps.setFloat(4, book.getPrice());
+				ps.setString(5, book.getPublisher());
+				ps.setString(6, book.getPublished_date());
+				ps.setInt(7, book.getQty());
+				ps.setLong(8, book.getBook_id());
+			}
+		});
 	}
 
 }
