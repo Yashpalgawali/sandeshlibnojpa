@@ -31,8 +31,7 @@ public class ReaderServImpl implements ReaderService {
 		try {
 			return readerrepo.getReaderById(id);
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 			return null;
 		}
 		
