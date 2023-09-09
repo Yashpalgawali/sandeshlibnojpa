@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,11 @@ public class BookController {
 	@Autowired
 	AssignBookService assignbookserv;
 	
+	LocalDateTime tdate;
+	LocalDateTime ttime;
+	
+	DateTimeFormatter dformatdate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	DateTimeFormatter dformattime = DateTimeFormatter.ofPattern("HH:mm:ss");
 	
 	@GetMapping("/addbook")
 	public String addBook()
@@ -51,26 +58,27 @@ public class BookController {
 	
 	@PostMapping("/savebook")
 	public String saveBook(@ModelAttribute("Books") Books book)
-	//public String saveBook(@ModelAttribute("Books") Books book)
 	{
-		System.out.println("Books info is \n Book Name = "+book.getBook_name()+"\nAuthor ="+book.getBook_author()+"\nQuantity = "+book.getQty());
-		return "redirect:/addbook";
-//		int res = bookserv.saveBook(book);
-//		if(res>0)
-//		{
-//			return "redirect:/viewbooks";
-//		}
-//		else
-//		{
-//			return "redirect:/viewbooks";
-//		}
+		tdate= LocalDateTime.now();
+		String today = dformatdate.format(tdate);
+		String time  = dformattime.format(tdate); 
+		
+		book.setAdd_date(today);
+		book.setAdd_time(time);
+		
+		int res = bookserv.saveBook(book);
+		if(res>0) {
+			return "redirect:/viewbooks";
+		}
+		else {
+			return "redirect:/viewbooks";
+		}
 	}
 	
 	@GetMapping("/viewbooks")
 	public String viewBooks(Model model)
 	{
 		List<Books> blist = bookserv.getAllBooks();
-		blist.stream().forEach(e->System.err.println(e.getBook_name()));
 		model.addAttribute("blist", blist);
 		return "ViewBooks";
 	}

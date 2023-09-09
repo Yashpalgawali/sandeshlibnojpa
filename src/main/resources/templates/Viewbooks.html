@@ -13,18 +13,20 @@
 		<div th:if="${reserr}"><h6 class="alert alert-danger" th:text="${reserr}"></h6> </div>
 		<div th:if="${response}"><h6 class="alert alert-success" th:text="${response}"></h6> </div>
 		<table class="table table-hover table-striped">
-			<tr>
-				<thead >
-					<td>Sr. No.</td>
-					<td>Book Name</td>
-					<td>Author</td>
-					<td>Description</td>
-					<td>Publisher</td>
-					<td>Published Date</td>
-					<td>Price</td>
-					<td>Quantity</td> 
-				</thead>
-			</tr>
+			<thead>
+			  <tr>
+				<th>Sr. No.</th>
+				<th>Book Name</th>
+				<th>Author</th>
+				<th>Description</th>
+				<th>Publisher</th>
+				<th>Published Date</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Added Date Time</th>
+				<th>Action</th>
+			   </tr> 
+			</thead>
 			<tbody>
 				<th:block th:each="book : ${blist}">
 					<tr>
@@ -36,6 +38,7 @@
 						<td th:text="${book.published_date}"></td>
 						<td th:text="${book.price}"></td>
 						<td th:text="${book.qty}"></td>
+						<td th:text="|${book.add_date}  ${book.add_time}|"></td>
 						<td ><a th:href="'/editbookbyid/'+${book.book_id}">Edit</a> </td>
 					</tr>
 				</th:block>

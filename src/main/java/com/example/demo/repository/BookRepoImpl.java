@@ -23,7 +23,7 @@ public class BookRepoImpl implements BookRepository {
 	public int saveBook(Books book) {
 		// TODO Auto-generated method stub
 		
-		return temp.update("INSERT INTO tbl_books values('0',?,?,?,?,?,?,?)", new PreparedStatementSetter() {
+		return temp.update("INSERT INTO tbl_books values('0',?,?,?,?,?,?,?,?,?)", new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -35,6 +35,8 @@ public class BookRepoImpl implements BookRepository {
 				ps.setString(5, book.getPublisher());
 				ps.setString(6, book.getPublished_date());
 				ps.setInt(7, book.getQty());
+				ps.setString(8, book.getAdd_date());
+				ps.setString(9, book.getAdd_time());
 			}
 		});
 	}
@@ -57,7 +59,8 @@ public class BookRepoImpl implements BookRepository {
 				book.setPublisher(rs.getString(6));
 				book.setPublished_date(rs.getString(7));
 				book.setQty(rs.getInt(8));
-				
+				book.setAdd_date(rs.getString(9));
+				book.setAdd_time(rs.getString(10));
 				return book;
 			}
 		});
@@ -66,7 +69,7 @@ public class BookRepoImpl implements BookRepository {
 	@Override
 	public List<Books> getBookByBookId(Long id) {
 		// TODO Auto-generated method stub
-		return temp.query("select * from tbl_books WHERE book_id="+id, new RowMapper<Books>() {
+		return temp.query("SELECT * FROM tbl_books WHERE book_id="+id, new RowMapper<Books>() {
 
 			@Override
 			public Books mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -81,7 +84,8 @@ public class BookRepoImpl implements BookRepository {
 				book.setPublisher(rs.getString(6));
 				book.setPublished_date(rs.getString(7));
 				book.setQty(rs.getInt(8));
-
+				book.setAdd_date(rs.getString(9));
+				book.setAdd_time(rs.getString(10));
 				return book;
 			}
 		});
@@ -90,7 +94,7 @@ public class BookRepoImpl implements BookRepository {
 	@Override
 	public int updateBook(Books book) {
 		// TODO Auto-generated method stub
-		return temp.update("update tbl_books set book_name=?,book_author=?,description=?,price=?,publisher=?,published_date=?,qty=? WHERE book_id=?", new PreparedStatementSetter() {
+		return temp.update("update tbl_books set book_name=?,book_author=?,description=?,price=?,publisher=?,published_date=?,qty=?,add_date=?,add_time=? WHERE book_id=?", new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -102,7 +106,9 @@ public class BookRepoImpl implements BookRepository {
 				ps.setString(5, book.getPublisher());
 				ps.setString(6, book.getPublished_date());
 				ps.setInt(7, book.getQty());
-				ps.setLong(8, book.getBook_id());
+				ps.setString(8, book.getAdd_date());
+				ps.setString(9, book.getAdd_time());
+				ps.setLong(10, book.getBook_id());
 			}
 		});
 	}

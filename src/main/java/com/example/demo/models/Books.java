@@ -26,4 +26,9 @@ public class Books {
 	
 	private int qty;
 	
+	private String add_date;
+	
+	
+	private String add_time;
+	
 }
