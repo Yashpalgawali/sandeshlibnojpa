@@ -31,6 +31,17 @@
 		<label for="published_date">Published date</label>
 			<input type="date" id="published_date" name="published_date" class="form-control mb-3" th:value="${book.published_date}"  placeholder="Please Enter Published date"/>
 	</div>
+	
+	<div class="form-group mb-3">
+		<label for="add_date">Added Date</label>
+			<input type="date" id="add_date" name="add_date" class="form-control mb-3" th:value="${book.add_date}"  placeholder="Please Enter Book Added date"/>
+	</div>
+	
+	<div class="form-group mb-3">
+		<label for="add_time">Added Time</label>
+			<input type="time" id="add_time" name="add_time" class="form-control mb-3" th:value="${book.add_time}"  placeholder="Please Enter Book Added Time"/>
+	</div>
+	
 	<div class="form-group mb-3">
 		<label for="price">Price</label>
 			<input type="text" id="price" name="price" class="form-control mb-3" th:value="${book.price}"  placeholder="Please Enter Book Price"/>

@@ -32,8 +32,8 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 				
 				ps.setString(1, books.getAssign_date());
 				ps.setString(2, books.getAssign_time());
-				ps.setLong(3, books.getBook_id());
-				ps.setLong(4, books.getUsers_id());
+				ps.setString(3, books.getBook_id());
+				ps.setLong(4, books.getReader_id());
 			}
 		});
 	}
@@ -41,7 +41,8 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 	@Override
 	public List<AssignedBooks> getAllAssignedBooks() {
 		// TODO Auto-generated method stub
-		return temp.query("SELECT * FROM assigned_books JOIN tbl_books ON tbl_books.book_id=assigned_books.book_id JOIN tbl_users ON tbl_users.user_id=assigned_books.users_id", new RowMapper<AssignedBooks>() {
+		return temp.query("SELECT * FROM assigned_books JOIN tbl_books ON tbl_books.book_id=assigned_books.book_id "
+						+ " JOIN tbl_users ON tbl_users.user_id=assigned_books.users_id", new RowMapper<AssignedBooks>() {
 
 			@Override
 			public AssignedBooks mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -51,10 +52,10 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 				books.setAssigned_id(rs.getLong(1));
 				books.setAssign_date(rs.getString(2));
 				books.setAssign_time(rs.getString(3));
-				books.setBook_id(rs.getLong(4));
-				books.setUsers_id(rs.getLong(5));
+				
 				
 				Books book = new Books();
+				book.setBook_id(rs.getLong(6));
 				book.setBook_name(rs.getString(7));
 				book.setBook_author(rs.getString(8));
 				book.setDescription(rs.getString(9));

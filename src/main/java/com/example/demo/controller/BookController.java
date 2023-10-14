@@ -89,6 +89,7 @@ public class BookController {
 		List<Books> book = bookserv.getBookByBookId(id);
 		if(book.size()>0) {
 			Books boo = book.get(0);
+			System.err.println(boo.toString());
 			model.addAttribute("book", boo);
 			return "EditBook";
 		}

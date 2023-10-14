@@ -15,9 +15,9 @@ public class AssignedBooks {
 	
 	private String 	assign_time;
 	
-	private Long book_id;
+	private String book_id;
 	
-	private Long users_id;
+	private Long reader_id;
 	
 	private Books books;
 	
