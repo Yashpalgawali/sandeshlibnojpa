@@ -2,6 +2,8 @@ package com.example.demo.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -18,6 +20,7 @@ public class BookAssignHistory {
 	private String assign_time;
 	
 	private Readers readers;
+	
 	
 	private Books books;
 	

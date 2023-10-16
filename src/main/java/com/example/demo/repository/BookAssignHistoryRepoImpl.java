@@ -38,20 +38,21 @@ public class BookAssignHistoryRepoImpl implements BookAssignHistoryRepo {
 	}
 
 	@Override
-	public List<BookAssignHistory> getBookAssignHistoryByReadersId(Long reder_id) {
+	public List<BookAssignHistory> getBookAssignHistoryByReadersId(Long reader_id) {
 		// TODO Auto-generated method stub
 		return temp.query("SELECT * FROM book_assign_history "
 						+ " JOIN tbl_books ON tbl_books.book_id=book_assign_history.book_id "
-						+ " JOIN tbl_readers ON tbl_readers.reader_id=book_assign_history.reader_id", new RowMapper<BookAssignHistory>() {
+						+ " JOIN tbl_readers ON tbl_readers.reader_id=book_assign_history.reader_id WHERE book_assign_history.reader_id="+reader_id, new RowMapper<BookAssignHistory>() {
 
 			@Override
 			public BookAssignHistory mapRow(ResultSet rs, int rowNum) throws SQLException {
 				
 				BookAssignHistory bhist = new BookAssignHistory();
-				bhist.setBook_id(rs.getLong(1));
-				bhist.setReader_id(rs.getLong(2));
-				bhist.setAssign_date(rs.getString(3));
-				bhist.setAssign_time(rs.getString(4));
+				bhist.setAssign_hist_id(rs.getLong(1));
+				bhist.setBook_id(rs.getLong(2));
+				bhist.setReader_id(rs.getLong(3));
+				bhist.setAssign_date(rs.getString(4));
+				bhist.setAssign_time(rs.getString(5));
 				
 				Books book = new Books();
 				book.setBook_id(rs.getLong(6));

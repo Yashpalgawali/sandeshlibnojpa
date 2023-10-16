@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>View Books</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -9,9 +10,14 @@
 </head>
 <body>
 
-	<div class="container">
+<div th:replace="fragments/Header.html :: header">
+</div>
+	<div class="container" style="margin-top:80px;">
 		<div th:if="${reserr}"><h6 class="alert alert-danger" th:text="${reserr}"></h6> </div>
 		<div th:if="${response}"><h6 class="alert alert-success" th:text="${response}"></h6> </div>
+		<div>
+			<h4>View Books <a th:href="addbook" class="btn btn-primary" style="float:right;">Add Book</a> </h4> 
+		</div>
 		<table class="table table-hover table-striped">
 			<thead>
 			  <tr>

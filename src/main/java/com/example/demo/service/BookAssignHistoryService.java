@@ -1,15 +1,13 @@
-package com.example.demo.repository;
+package com.example.demo.service;
 
 import java.util.List;
 
 import com.example.demo.models.BookAssignHistory;
-import com.example.demo.models.Books;
 
-public interface BookAssignHistoryRepo {
+public interface BookAssignHistoryService {
 
 	public int saveBookasignHistory(BookAssignHistory bookassinghist);
 	
 	public List<BookAssignHistory> getBookAssignHistoryByReadersId(Long reader_id);
-	
 	
 }
