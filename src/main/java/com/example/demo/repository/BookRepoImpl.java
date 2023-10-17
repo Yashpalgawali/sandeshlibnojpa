@@ -123,7 +123,7 @@ public class BookRepoImpl implements BookRepository {
 
 	@Override
 	public int getLastInsertedRecord() {
-		// TODO Auto-generated method stub
+		
 		return temp.queryForObject("SELECT last_insert_id()", Integer.class);
 	}
 

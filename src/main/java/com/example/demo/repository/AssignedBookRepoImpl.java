@@ -71,5 +71,8 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 		});
 	}
 
-	
+	@Override
+	public int getLastInsertedRecord() {
+		return temp.queryForObject("SELECT last_insert_id()", Integer.class);
+	}
 }

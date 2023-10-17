@@ -38,21 +38,21 @@ public class AssignBookServImpl implements AssignBookService {
 		
 		if(res>0) {
 			
-			int lid = bookrepo.getLastInsertedRecord();
-			Long li = Integer.toUnsignedLong(lid);
+			int lid = assignbookerpo.getLastInsertedRecord();
+			System.err.println("laset reocrd inserted ID = "+lid);
+			String lasid =""+lid;
+			Long li = Long.valueOf(lasid);
 			List<Books> bks = bookrepo.getBookByBookId(li);
-			Books book = null;
+			System.out.println("Books assigned successfully\n result size "+bks.size());
 			for(int i=0;i<bks.size();i++)
 			{
 				System.err.println(bks.get(i).toString());
-				book = bks.get(i);
+				Books book = bks.get(i);
 				int qty = book.getQty();
-				qty-=1;
+				qty = qty-1;
 				bookrepo.updateBookQuanity(book.getBook_id(), qty);
 			}
-			
-			
-			
+						
 			BookAssignHistory bhist = new BookAssignHistory();
 			bhist.setAssign_date(dformat.format(local));
 			bhist.setAssign_time(tformat.format(local));

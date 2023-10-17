@@ -8,4 +8,5 @@ public interface AssignBookRepo {
 
 	public int assignBook(AssignedBooks books);
 	public List<AssignedBooks> getAllAssignedBooks();
+	public int getLastInsertedRecord();
 }
