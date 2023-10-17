@@ -14,4 +14,9 @@ public interface BookRepository {
 	
 	public int updateBook(Books book);
 	
+	public int getBooksQuantity(int book_id);
+	
+	public int getLastInsertedRecord();
+	
+	public int updateBookQuanity(Long bookid,int qty);
 }

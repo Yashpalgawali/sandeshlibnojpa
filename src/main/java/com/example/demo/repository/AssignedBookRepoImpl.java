@@ -23,12 +23,11 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 	
 	@Override
 	public int assignBook(AssignedBooks books) {
-		// TODO Auto-generated method stub
+
 		return temp.update("INSERT INTO assigned_books VALUES('0',?,?,?,?)", new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				// TODO Auto-generated method stub
 				
 				ps.setString(1, books.getAssign_date());
 				ps.setString(2, books.getAssign_time());
@@ -40,19 +39,17 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 
 	@Override
 	public List<AssignedBooks> getAllAssignedBooks() {
-		// TODO Auto-generated method stub
+	
 		return temp.query("SELECT * FROM assigned_books JOIN tbl_books ON tbl_books.book_id=assigned_books.book_id "
 						+ " JOIN tbl_users ON tbl_users.user_id=assigned_books.users_id", new RowMapper<AssignedBooks>() {
 
 			@Override
 			public AssignedBooks mapRow(ResultSet rs, int rowNum) throws SQLException {
-				// TODO Auto-generated method stub
 				
 				AssignedBooks books = new AssignedBooks();
 				books.setAssigned_id(rs.getLong(1));
 				books.setAssign_date(rs.getString(2));
 				books.setAssign_time(rs.getString(3));
-				
 				
 				Books book = new Books();
 				book.setBook_id(rs.getLong(6));
@@ -74,4 +71,5 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 		});
 	}
 
+	
 }

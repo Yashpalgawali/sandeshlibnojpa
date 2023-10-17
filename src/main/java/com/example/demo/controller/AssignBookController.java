@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.models.AssignedBooks;
+import com.example.demo.models.Books;
+import com.example.demo.repository.BookRepository;
 import com.example.demo.service.AssignBookService;
 import com.example.demo.service.BookService;
 import com.example.demo.service.ReaderService;
@@ -40,7 +41,15 @@ public class AssignBookController {
 	@PostMapping("assignbook")
 	public String assignBook(@ModelAttribute("AssignedBook")AssignedBooks assignbook,RedirectAttributes attr) {
 		
-		int res = assignbookserv.assignBook(assignbook);
+		String book_ids = assignbook.getBook_id();
+		String newbids[] = book_ids.split(",");
+		int res = 0;
+		for(String bookid : newbids)
+		{
+			assignbook.setBook_id(bookid);
+			res = assignbookserv.assignBook(assignbook);
+		}
+		
 		if(res>0) {
 			attr.addFlashAttribute("response", "Book Assigned Successfully");
 			return "redirect:/viewreaders";

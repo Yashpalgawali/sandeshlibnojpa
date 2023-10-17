@@ -23,7 +23,7 @@ public class ReadersRepoImpl implements ReaderRepository {
 	@Override
 	public int saveReader(Readers reader) {
 		// TODO Auto-generated method stub
-		return temp.update("INSERT INTO tbl_readers VALUES('0',?,?,?,?,?)", new PreparedStatementSetter() {
+		return temp.update("INSERT INTO tbl_readers VALUES('0',?,?,?,?)", new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {

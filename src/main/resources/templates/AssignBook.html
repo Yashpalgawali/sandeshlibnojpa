@@ -8,6 +8,8 @@
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"  />
+  	<link rel="stylesheet" th:href="@{/css/Main.css}">
   	
   	<script>
   		$(document).ready(function(){
@@ -17,41 +19,57 @@
 				placeholder : 'Please Select Book(s) ',
 				allowClear 	:  true
   			});
+  			
+  			$('#reader_id').select2({
+  				theme : 'classic',
+  				width : 'resolve',
+				placeholder : 'Please Select Reader ',
+				allowClear 	:  true
+  			});
   		})
   	</script>
 </head>
-<body><br><br><br>
+<body>
 	
-	<div class="container ">
+	<div th:replace="fragments/Header.html :: header"> </div>
+	<div class="container" >
+	<!-- start: PAGE HEADER -->
+		<div class="row">
+			<div class="col-sm-12">
+				<!-- start: PAGE TITLE & BREADCRUMB -->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a th:href="@{/}"><i class="fa fa-home"></i>&nbsp;Home</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">View Books</li>
+				</ol>
+			</div>
+		</div>
 		<form  th:action="@{assignbook}" method="POST">
-			<div class="form-group">
+			<div class="form-group mb-3 ">
 				<label for="reader_id">Reader </label>
-					<select name="reader_id" id="reader_id" class="form-control mb-3"  required>
+					<select name="reader_id" id="reader_id" class="form-control "  required>
 						<option selected disabled>Please Select Reader</option>
 							<th:block th:each="reader : ${reader}">
 								<option th:value="${reader.reader_id}" th:text="${reader.reader_name}"></option>
 							</th:block> 
 					</select>
 			</div>
-			
-			<div class="form-group">
+			<div class="form-group  mb-3 ">
 				<label for="book_id">Book </label>
-					<select name="book_id" id="book_id" class="form-control mb-3 selectpicker" multiple="multiple"  data-live-search="true" required>
-						
-							<th:block th:each="book : ${book}">
-							   <th:block th:if="${book.qty}>0">
-									<option th:value="${book.book_id}" th:text="${book.book_name}"></option>
-							   </th:block>
-							   <th:block th:unless="${book.qty}>0">
-									<option disabled th:value="${book.book_id}" th:text="${book.book_name}"></option>
-							   </th:block>
-							</th:block> 
+					<select name="book_id" id="book_id" class="form-control selectpicker " multiple="multiple"  data-live-search="true" required>
+						<th:block th:each="book : ${book}">
+						   <th:block th:if="${book.qty}>0">
+								<option th:value="${book.book_id}" th:text="${book.book_name}"></option>
+						   </th:block>
+						   <th:block th:unless="${book.qty}>0">
+								<option disabled th:value="${book.book_id}" th:text="${book.book_name}"></option>
+						   </th:block>
+						</th:block> 
 					</select>
 			</div>
-			
-			<input type="submit" class="btn btn-primary mb-3" value="Submit"/>
+			<input type="submit" class="btn btn-primary mb-3" value="Assign Book"/>
 		</form>
 	</div>
-	
-</body>
+  </body>
 </html>

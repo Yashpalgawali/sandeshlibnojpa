@@ -11,7 +11,6 @@
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"  />
 </head>
 <body>
-
 <div th:replace="fragments/Header.html :: header"> </div>
 	<div class="container" >
 	<!-- start: PAGE HEADER -->
@@ -22,14 +21,14 @@
 					<li class="breadcrumb-item">
 						<a th:href="@{/}"><i class="fa fa-home"></i>&nbsp;Home</a>
 					</li>
-					<li class="breadcrumb-item active" aria-current="page">Add Company</li>
+					<li class="breadcrumb-item active" aria-current="page">View Books</li>
 				</ol>
 			</div>
 		</div>
 		<div th:if="${reserr}"><h6 class="alert alert-danger" th:text="${reserr}"></h6> </div>
 		<div th:if="${response}"><h6 class="alert alert-success" th:text="${response}"></h6> </div>
 		<div>
-			<h4>View Books <a th:href="addbook" class="btn btn-primary" style="float:right;">Add Book</a> </h4> 
+			<h4>View Books <a th:href="@{/addbook}" class="btn btn-primary" style="float:right;">Add Book</a> </h4> 
 		</div>
 		<table class="table table-hover table-striped">
 			<thead>

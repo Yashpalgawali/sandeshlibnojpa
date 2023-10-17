@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.models.AssignedBooks;
 import com.example.demo.models.BookAssignHistory;
+import com.example.demo.models.Books;
 import com.example.demo.repository.AssignBookRepo;
 import com.example.demo.repository.BookAssignHistoryRepo;
+import com.example.demo.repository.BookRepository;
 
 @Service("assignbookserv")
 public class AssignBookServImpl implements AssignBookService {
@@ -22,14 +24,35 @@ public class AssignBookServImpl implements AssignBookService {
 	@Autowired
 	AssignBookRepo assignbookerpo;
 	
+	@Autowired 
+	BookRepository bookrepo;
+	
 	@Autowired
 	BookAssignHistoryRepo bookassignhistrepo;
 	
 	@Override
 	public int assignBook(AssignedBooks books) {
+		books.setAssign_date(dformat.format(local));
+		books.setAssign_time(tformat.format(local));
 		int res = assignbookerpo.assignBook(books);
 		
 		if(res>0) {
+			
+			int lid = bookrepo.getLastInsertedRecord();
+			Long li = Integer.toUnsignedLong(lid);
+			List<Books> bks = bookrepo.getBookByBookId(li);
+			Books book = null;
+			for(int i=0;i<bks.size();i++)
+			{
+				System.err.println(bks.get(i).toString());
+				book = bks.get(i);
+				int qty = book.getQty();
+				qty-=1;
+				bookrepo.updateBookQuanity(book.getBook_id(), qty);
+			}
+			
+			
+			
 			BookAssignHistory bhist = new BookAssignHistory();
 			bhist.setAssign_date(dformat.format(local));
 			bhist.setAssign_time(tformat.format(local));

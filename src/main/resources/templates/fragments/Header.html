@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"  />
 <title>Sandesh Library</title>
 </head>
 <body>
@@ -16,16 +17,19 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="viewbooks">Books</a>
+          <a class="nav-link" th:href="@{viewbooks}"> Books</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="viewreaders">Reader</a>
+          <a class="nav-link" th:href="@{/viewreaders}">Reader</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="viewbooks">Books</a>
+          <a class="nav-link" th:href="@{/assignbook}">Assign Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/contact-us}">Contact Us</a>
         </li>
        
        

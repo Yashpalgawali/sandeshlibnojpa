@@ -36,15 +36,15 @@ public class ReaderController {
 	}
 	
 	@PostMapping("savereader")
-	public String saveReader(@RequestBody Readers reader)
-	{
+	public String saveReader(@ModelAttribute("Readers") Readers reader,RedirectAttributes attr) {
 		int res = readerserv.saveReader(reader);
-		if(res> 0)
-		{
+		if(res> 0) {
+			attr.addFlashAttribute("response", "Reader is saved Successfully");
 			return "redirect:/viewreaders";
 		}
 		else {
-			return "Reader not saved";
+			attr.addFlashAttribute("reserr", "Reader is not saved ");
+			return "redirect:/viewreaders";
 		}
 	}
 	

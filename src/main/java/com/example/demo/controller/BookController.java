@@ -57,8 +57,7 @@ public class BookController {
 //	}
 	
 	@PostMapping("/savebook")
-	public String saveBook(@ModelAttribute("Books") Books book)
-	{
+	public String saveBook(@ModelAttribute("Books") Books book) {
 		tdate= LocalDateTime.now();
 		String today = dformatdate.format(tdate);
 		String time  = dformattime.format(tdate); 
@@ -76,20 +75,18 @@ public class BookController {
 	}
 	
 	@GetMapping("/viewbooks")
-	public String viewBooks(Model model)
-	{
+	public String viewBooks(Model model) {
 		List<Books> blist = bookserv.getAllBooks();
 		model.addAttribute("blist", blist);
 		return "ViewBooks";
 	}
 	
 	@GetMapping("editbookbyid/{id}") 
-	public String getBookById(@PathVariable("id") Long id,Model model, RedirectAttributes attr)
-	{
+	public String getBookById(@PathVariable("id") Long id,Model model, RedirectAttributes attr) {
 		List<Books> book = bookserv.getBookByBookId(id);
-		if(book.size()>0) {
+		if(book!=null) {
 			Books boo = book.get(0);
-			System.err.println(boo.toString());
+			
 			model.addAttribute("book", boo);
 			return "EditBook";
 		}
@@ -121,8 +118,7 @@ public class BookController {
 	
 	@PostMapping("/issuebook")
 	@ResponseBody
-	public String issueBook(@RequestBody AssignedBooks books)
-	{
+	public String issueBook(@RequestBody AssignedBooks books) {
 		int res = assignbookserv.assignBook(books);
 		if(res>0)
 			{return "SUCCESS";}
@@ -131,10 +127,10 @@ public class BookController {
 			return "FAILED";
 		}
 	}
+	
 	@GetMapping("/getassignedbooks")
 	@ResponseBody
-	public List<AssignedBooks> getAllAssignedBooks()
-	{
+	public List<AssignedBooks> getAllAssignedBooks() {
 		return assignbookserv.getAllAssignedBooks();
 	}
 	

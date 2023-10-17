@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -68,7 +69,8 @@ public class BookRepoImpl implements BookRepository {
 
 	@Override
 	public List<Books> getBookByBookId(Long id) {
-		// TODO Auto-generated method stub
+
+	
 		return temp.query("SELECT * FROM tbl_books WHERE book_id="+id, new RowMapper<Books>() {
 
 			@Override
@@ -102,13 +104,39 @@ public class BookRepoImpl implements BookRepository {
 				ps.setString(1, book.getBook_name());
 				ps.setString(2, book.getBook_author());
 				ps.setString(3, book.getDescription());
-				ps.setFloat(4, book.getPrice());
+				ps.setFloat( 4, book.getPrice());
 				ps.setString(5, book.getPublisher());
 				ps.setString(6, book.getPublished_date());
 				ps.setInt(7, book.getQty());
 				ps.setString(8, book.getAdd_date());
 				ps.setString(9, book.getAdd_time());
-				ps.setLong(10, book.getBook_id());
+				ps.setLong( 10, book.getBook_id());
+			}
+		});
+	}
+
+	@Override
+	public int getBooksQuantity(int bid) {
+		
+		return temp.queryForObject("SELECT qty FROM tbl_books WHERE book_id="+bid, Integer.class);
+	}
+
+	@Override
+	public int getLastInsertedRecord() {
+		// TODO Auto-generated method stub
+		return temp.queryForObject("SELECT last_insert_id()", Integer.class);
+	}
+
+	@Override
+	public int updateBookQuanity(Long bookid, int qty) {
+		// TODO Auto-generated method stub
+		return temp.update("UPDATE tbl_books set qty=? WHERE book_id=?", new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				
+				ps.setInt(1, qty);
+				ps.setLong(2, bookid);
 			}
 		});
 	}
