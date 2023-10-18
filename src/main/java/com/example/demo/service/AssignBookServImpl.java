@@ -17,7 +17,7 @@ import com.example.demo.repository.BookRepository;
 @Service("assignbookserv")
 public class AssignBookServImpl implements AssignBookService {
 
-	LocalDateTime local = LocalDateTime.now();
+	LocalDateTime local ;
 	DateTimeFormatter dformat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	DateTimeFormatter tformat = DateTimeFormatter.ofPattern("HH:mm:ss");
 	
@@ -32,30 +32,27 @@ public class AssignBookServImpl implements AssignBookService {
 	
 	@Override
 	public int assignBook(AssignedBooks books) {
+		local = LocalDateTime.now();
 		books.setAssign_date(dformat.format(local));
 		books.setAssign_time(tformat.format(local));
 		int res = assignbookerpo.assignBook(books);
 		
 		if(res>0) {
 			
-			int lid = assignbookerpo.getLastInsertedRecord();
-			System.err.println("laset reocrd inserted ID = "+lid);
-			String lasid =""+lid;
-			Long li = Long.valueOf(lasid);
-			List<Books> bks = bookrepo.getBookByBookId(li);
-			System.out.println("Books assigned successfully\n result size "+bks.size());
-			for(int i=0;i<bks.size();i++)
-			{
-				System.err.println(bks.get(i).toString());
-				Books book = bks.get(i);
+			List<AssignedBooks> asbooks = assignbookerpo.getLastAssignedBook();
+			for(int i=0;i<asbooks.size();i++) {
+				System.err.println(asbooks.get(i).toString());
+				Books book = asbooks.get(i).getBooks();
 				int qty = book.getQty();
 				qty = qty-1;
 				bookrepo.updateBookQuanity(book.getBook_id(), qty);
 			}
 						
 			BookAssignHistory bhist = new BookAssignHistory();
-			bhist.setAssign_date(dformat.format(local));
-			bhist.setAssign_time(tformat.format(local));
+			bhist.setOperation("assigned");
+			bhist.setOperation_date(dformat.format(local));
+			bhist.setOperation_time(tformat.format(local));
+			
 			bhist.setBook_id(Long.parseLong(books.getBook_id()));
 			bhist.setReader_id(books.getReader_id());
 			
@@ -68,6 +65,13 @@ public class AssignBookServImpl implements AssignBookService {
 	public List<AssignedBooks> getAllAssignedBooks() {
 		// TODO Auto-generated method stub
 		return assignbookerpo.getAllAssignedBooks();
+	}
+
+	@Override
+	public List<AssignedBooks> getAllAssignedBooksByReaderId(Long reader_id) {
+
+		List<AssignedBooks> blist = assignbookerpo.getAllAssignedBooksByReaderId(reader_id);
+		return blist;
 	}
 
 }

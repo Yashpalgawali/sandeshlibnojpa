@@ -9,11 +9,17 @@ import lombok.Data;
 @Data
 public class BookAssignHistory {
 	
-	private Long assign_hist_id;
+	private Long hist_id;
 	
 	private Long book_id;
 	
 	private Long reader_id;
+	
+	private String operation;
+	
+	private String operation_date;
+	
+	private String operation_time;
 	
 	private String assign_date;
 	
@@ -21,7 +27,5 @@ public class BookAssignHistory {
 	
 	private Readers readers;
 	
-	
 	private Books books;
-	
 }

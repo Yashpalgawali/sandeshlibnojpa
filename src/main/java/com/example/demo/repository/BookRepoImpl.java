@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.models.AssignedBooks;
 import com.example.demo.models.Books;
 
 @Repository("bookrepo")
@@ -121,11 +122,7 @@ public class BookRepoImpl implements BookRepository {
 		return temp.queryForObject("SELECT qty FROM tbl_books WHERE book_id="+bid, Integer.class);
 	}
 
-	@Override
-	public int getLastInsertedRecord() {
-		
-		return temp.queryForObject("SELECT last_insert_id()", Integer.class);
-	}
+	
 
 	@Override
 	public int updateBookQuanity(Long bookid, int qty) {

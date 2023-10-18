@@ -24,22 +24,23 @@ public class BookAssignHistoryRepoImpl implements BookAssignHistoryRepo {
 	@Override
 	public int saveBookasignHistory(BookAssignHistory bookassinghist) {
 
-		return temp.update("insert into book_assign_history values('0',?,?,?,?)", new PreparedStatementSetter() {
+		return temp.update("insert into book_assign_history values('0',?,?,?,?,?)", new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				// TODO Auto-generated method stub
+				
 				ps.setLong(1, bookassinghist.getBook_id());
 				ps.setLong(2, bookassinghist.getReader_id());
-				ps.setString(3, bookassinghist.getAssign_date());
-				ps.setString(4, bookassinghist.getAssign_time());
+				ps.setString(3, bookassinghist.getOperation());
+				ps.setString(4, bookassinghist.getOperation_date());
+				ps.setString(5, bookassinghist.getOperation_time());
 			}
 		});
 	}
 
 	@Override
 	public List<BookAssignHistory> getBookAssignHistoryByReadersId(Long reader_id) {
-		// TODO Auto-generated method stub
+
 		return temp.query("SELECT * FROM book_assign_history "
 						+ " JOIN tbl_books ON tbl_books.book_id=book_assign_history.book_id "
 						+ " JOIN tbl_readers ON tbl_readers.reader_id=book_assign_history.reader_id WHERE book_assign_history.reader_id="+reader_id, new RowMapper<BookAssignHistory>() {
@@ -48,30 +49,31 @@ public class BookAssignHistoryRepoImpl implements BookAssignHistoryRepo {
 			public BookAssignHistory mapRow(ResultSet rs, int rowNum) throws SQLException {
 				
 				BookAssignHistory bhist = new BookAssignHistory();
-				bhist.setAssign_hist_id(rs.getLong(1));
+				bhist.setHist_id(rs.getLong(1));
 				bhist.setBook_id(rs.getLong(2));
 				bhist.setReader_id(rs.getLong(3));
-				bhist.setAssign_date(rs.getString(4));
-				bhist.setAssign_time(rs.getString(5));
+				bhist.setOperation(rs.getString(4));
+				bhist.setOperation_date(rs.getString(5));
+				bhist.setOperation_time(rs.getString(6));
 				
 				Books book = new Books();
-				book.setBook_id(rs.getLong(6));
-				book.setBook_name(rs.getString(7));
-				book.setBook_author(rs.getString(8));
-				book.setDescription(rs.getString(9));
-				book.setPrice(rs.getFloat(10));
-				book.setPublisher(rs.getString(11));
-				book.setPublished_date(rs.getString(12));
-				book.setQty(rs.getInt(13));
-				book.setAdd_date(rs.getString(14));
-				book.setAdd_time(rs.getString(15));
+				book.setBook_id(rs.getLong(7));
+				book.setBook_name(rs.getString(8));
+				book.setBook_author(rs.getString(9));
+				book.setDescription(rs.getString(10));
+				book.setPrice(rs.getFloat(11));
+				book.setPublisher(rs.getString(12));
+				book.setPublished_date(rs.getString(13));
+				book.setQty(rs.getInt(14));
+				book.setAdd_date(rs.getString(15));
+				book.setAdd_time(rs.getString(16));
 				
 				Readers reader = new Readers();
-				reader.setReader_id(rs.getLong(16));
-				reader.setReader_name(rs.getString(17));
-				reader.setReader_email(rs.getString(18));
-				reader.setReader_address(rs.getNString(19));
-				reader.setReader_contact(rs.getString(20));
+				reader.setReader_id(rs.getLong(17));
+				reader.setReader_name(rs.getString(18));
+				reader.setReader_email(rs.getString(19));
+				reader.setReader_address(rs.getNString(20));
+				reader.setReader_contact(rs.getString(21));
 				
 				bhist.setBooks(book);
 				bhist.setReaders(reader);

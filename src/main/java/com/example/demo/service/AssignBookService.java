@@ -9,4 +9,8 @@ public interface AssignBookService {
 	public int assignBook(AssignedBooks books);
 	
 	public List<AssignedBooks> getAllAssignedBooks();
+	
+	public List<AssignedBooks> getAllAssignedBooksByReaderId(Long reader_id);
+	
+	
 }

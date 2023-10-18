@@ -22,4 +22,6 @@ public class AssignedBooks {
 	private Books books;
 	
 	private Users users;
+	
+	private Readers reader;
 }

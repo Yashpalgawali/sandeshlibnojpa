@@ -27,4 +27,8 @@ public class Readers {
 	private List<Books> books;
 	
 	private Books book;
+	
+	private String assigned_books;
+	
+	private String assigned_book_ids;
 }
