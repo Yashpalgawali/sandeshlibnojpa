@@ -39,8 +39,9 @@
 			  <tr>
 				<th>Sr. No.</th>
 				<th>Book </th>
-				<th>Book Assign Date </th>
-				<th>Book Assign Time</th>
+				<th>Operation Date </th>
+				<th>Operation Time</th>
+				<th>Operation</th>
 			   </tr> 
 			</thead>
 			<tbody>
@@ -48,8 +49,9 @@
 					<tr>
 						<td th:text="${bhistStat.count}"></td>
 						<td th:text="${bhist.books.book_name}"></td>
-						<td th:text="${bhist.assign_date}"></td>
-						<td th:text="${bhist.assign_time}"></td>
+						<td th:text="${bhist.operation_date}"></td>
+						<td th:text="${bhist.operation_time}"></td>
+						<td style="text-transform: capitalize" th:text="${bhist.operation}"></td>
 					</tr>
 				</th:block>
 			</tbody>
