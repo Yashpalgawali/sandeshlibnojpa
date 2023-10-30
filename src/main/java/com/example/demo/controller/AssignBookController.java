@@ -83,7 +83,7 @@ public class AssignBookController {
 			return "RetrieveAssignedBooks";
 		}
 		else {
-			model.addAttribute("reserr", "No Book is assigned ");
+			attr.addFlashAttribute("reserr", "Book(s) are not Assigned ");
 			return "redirect:/viewreaders";
 		}
 	}
@@ -91,7 +91,13 @@ public class AssignBookController {
 	@PostMapping("/retrievebooks")@ResponseBody
 	public String retrieveBooksByReadersId(@ModelAttribute("Readers") Readers reader)
 	{
+		String assigned_books = reader.getAssigned_book_ids();
 		
+		String[] abids = assigned_books.split(",");
+		for(String aid : abids)
+		{
+			System.err.println("Book ID = "+aid);
+		}
 		return ""+reader.getAssigned_book_ids();
 	}
 	

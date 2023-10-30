@@ -32,29 +32,14 @@ public class BookController {
 	LocalDateTime tdate;
 	LocalDateTime ttime;
 	
-	DateTimeFormatter dformatdate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	DateTimeFormatter dformatdate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	DateTimeFormatter dformattime = DateTimeFormatter.ofPattern("HH:mm:ss");
 	
 	@GetMapping("/addbook")
-	public String addBook()
-	{
+	public String addBook() {
 		return "AddBook";
 	}
 	
-//	@PostMapping("/savebook")
-//	public String saveBook(@RequestBody Books book)
-//	//public String saveBook(@ModelAttribute("Books") Books book)
-//	{
-//		int res = bookserv.saveBook(book);
-//		if(res>0)
-//		{
-//			return "redirect:/viewbooks";
-//		}
-//		else
-//		{
-//			return "redirect:/viewbooks";
-//		}
-//	}
 	
 	@PostMapping("/savebook")
 	public String saveBook(@ModelAttribute("Books") Books book) {
@@ -86,11 +71,11 @@ public class BookController {
 		List<Books> book = bookserv.getBookByBookId(id);
 		if(book!=null) {
 			Books boo = book.get(0);
-			
 			model.addAttribute("book", boo);
 			return "EditBook";
 		}
 		else {
+			attr.addFlashAttribute("reserr", "Book Not Found");
 			return "redirect:/viewbooks";
 		}
 	}

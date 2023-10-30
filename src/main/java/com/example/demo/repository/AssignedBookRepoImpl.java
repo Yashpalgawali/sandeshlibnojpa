@@ -43,7 +43,7 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 	public List<AssignedBooks> getAllAssignedBooks() {
 	
 		return temp.query("SELECT * FROM assigned_books JOIN tbl_books ON tbl_books.book_id=assigned_books.book_id "
-						+ " JOIN tbl_users ON tbl_users.user_id=assigned_books.users_id", new RowMapper<AssignedBooks>() {
+						+ " JOIN tbl_readers ON tbl_readers.reader_id=assigned_books.reader_id", new RowMapper<AssignedBooks>() {
 
 			@Override
 			public AssignedBooks mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -61,12 +61,17 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 				
 				books.setBooks(book);
 				
-				Users user = new Users();
-				user.setUser_name(rs.getString(14));
-				user.setUser_email(rs.getString(15));
-				user.setUser_contact(rs.getString(16));
-				
-				books.setUsers(user);
+				Readers reader = new Readers();
+				reader.setReader_id(rs.getLong(16));
+				reader.setReader_name(rs.getString(17));
+				reader.setReader_email(rs.getString(18));
+				reader.setReader_address(rs.getString(19));
+//				Users user = new Users();
+//				user.setUser_name(rs.getString(14));
+//				user.setUser_email(rs.getString(15));
+//				user.setUser_contact(rs.getString(16));
+//				
+				books.setReader(reader);
 				
 				return books;
 			}
@@ -110,7 +115,7 @@ public class AssignedBookRepoImpl implements AssignBookRepo {
 	@Override
 	public List<AssignedBooks> getAllAssignedBooksByReaderId(Long id) {
 		return temp.query("SELECT * FROM assigned_books JOIN tbl_books ON tbl_books.book_id=assigned_books.book_id "
-				+ " JOIN tbl_readers ON tbl_readers.reader_id=assigned_books.users_id WHERE assigned_books.users_id="+id, new RowMapper<AssignedBooks>() {
+				+ " JOIN tbl_readers ON tbl_readers.reader_id=assigned_books.reader_id WHERE assigned_books.reader_id="+id, new RowMapper<AssignedBooks>() {
 
 	@Override
 	public AssignedBooks mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -41,7 +41,7 @@ public class AssignBookServImpl implements AssignBookService {
 			
 			List<AssignedBooks> asbooks = assignbookerpo.getLastAssignedBook();
 			for(int i=0;i<asbooks.size();i++) {
-				System.err.println(asbooks.get(i).toString());
+				
 				Books book = asbooks.get(i).getBooks();
 				int qty = book.getQty();
 				qty = qty-1;
@@ -63,13 +63,11 @@ public class AssignBookServImpl implements AssignBookService {
 
 	@Override
 	public List<AssignedBooks> getAllAssignedBooks() {
-		// TODO Auto-generated method stub
 		return assignbookerpo.getAllAssignedBooks();
 	}
 
 	@Override
 	public List<AssignedBooks> getAllAssignedBooksByReaderId(Long reader_id) {
-
 		List<AssignedBooks> blist = assignbookerpo.getAllAssignedBooksByReaderId(reader_id);
 		return blist;
 	}
